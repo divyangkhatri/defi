@@ -7,6 +7,7 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 
 const router = require("./routes/api/router");
+const evmRouter = require("./routes/api/evmRouter");
 const Moralis = require("./helpers/moralis");
 const swaggerUi = require("swagger-ui-express");
 
@@ -14,7 +15,7 @@ const swaggerJSDoc = require("swagger-jsdoc");
 
 const { CONFIG, ENVIRONMENT } = require("./config");
 
-const PORT = process.env?.PORT || 2083;
+const PORT = process.env?.PORT || 3000;
 const app = express();
 
 console.log(ENVIRONMENT);
@@ -84,7 +85,7 @@ app.use(function (req, res, next) {
 //     app.listen(PORT, () => {
 //       console.log(`Server running at (http://localhost:${PORT})`);
 //     });
-    
+
 //     Moralis.init();
 
 //   })
@@ -94,6 +95,7 @@ app.use(function (req, res, next) {
 
 // routes
 app.use(router);
+app.use(evmRouter);
 
 app.use(Sentry.Handlers.errorHandler());
 
